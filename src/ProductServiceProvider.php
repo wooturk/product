@@ -23,13 +23,13 @@ class ProductServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		Route::get('/user', [UserController::class, 'index']);
-		Route::post('/user', [UserController::class, 'post']);
-		Route::group(['middleware' => ['auth:sanctum']], function(){
-			Route::get('/users', [UserController::class, 'list']);
-			Route::get('/user/{id}', [UserController::class, 'get']);
-			Route::put('/user/{id}', [UserController::class, 'put']);
-			Route::delete('/user/{id}', [UserController::class, 'delete']);
+		Route::get('/product', [UserController::class, 'index'])->name('product-index');
+		Route::group(['middleware' => ['auth:sanctum','wooturk.gateway']], function(){
+			Route::post('/product', [UserController::class, 'post'])->name('product-create');
+			Route::get('/products', [UserController::class, 'list'])->name('product-list');
+			Route::get('/product/{id}', [UserController::class, 'get'])->name('product-get');
+			Route::put('/product/{id}', [UserController::class, 'put'])->name('product-update');
+			Route::delete('/product/{id}', [UserController::class, 'delete'])->name('product-delete');
 		});
 	}
 }
